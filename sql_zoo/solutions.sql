@@ -55,3 +55,13 @@ ORDER BY COUNT(c.actorid) DESC, m.title
 
 -- 15 
 -- List all the people who have worked with 'Art Garfunkel'. 
+-- Grab movies that have 'Art Garfunkel'
+-- Grab the actors that are in those same movies
+
+SELECT a.name FROM movie m 
+   JOIN casting c ON m.id=c.movieid
+   JOIN actor a ON c.actorid=a.id
+WHERE m.title IN (SELECT m.title FROM movie m
+   JOIN casting c ON m.id=c.movieid
+   JOIN actor a on c.actorid=a.id
+WHERE a.name = 'Art Garfunkel') && a.name != 'Art Garfunkel'
